@@ -6,7 +6,7 @@ IMAGE_ID=ami-03265a0778a880afb
 SECURITY_GROUP_ID=sg-044145deea7316391
 DOMAIN_NAME=joindevops.blog
 HOSTED_ZONE_ID=Z05137822OZWEMAN9Q55F
-=subnet-039bea7f7f5129e02
+SUBNET_ID=subnet-039bea7f7f5129e02
 
 # if mysql or mongodb instance_type should be t3.medium , for all others it is t2.micro
 
