@@ -5,6 +5,8 @@ INSTANCE_TYPE=""
 IMAGE_ID=ami-03265a0778a880afb
 SECURITY_GROUP_ID=sg-044145deea7316391
 DOMAIN_NAME=joindevops.blog
+SUBNET_ID=subnet-039bea7f7f5129e02
+
 
 # if mysql or mongodb instance_type should be t3.medium , for all others it is t2.micro
 
@@ -17,7 +19,7 @@ do
         INSTANCE_TYPE="t2.micro"
     fi
     echo "creating $i instance"
-    IP_ADDRESS=$(aws ec2 run-instances --image-id $IMAGE_ID  --instance-type $INSTANCE_TYPE --security-group-ids $SECURITY_GROUP_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" | jq -r '.Instances[0].PrivateIpAddress')
+    IP_ADDRESS=$(aws ec2 run-instances --image-id $IMAGE_ID  --instance-type $INSTANCE_TYPE --security-group-ids $SECURITY_GROUP_ID --subnet-ids $SUBNET_ID --tag-specifications "ResourceType=instance,Tags=[{Key=Name,Value=$i}]" | jq -r '.Instances[0].PrivateIpAddress')
     echo "created $i instance: $IP_ADDRESS"
 
     aws route53 change-resource-record-sets --hosted-zone-id Z098285010FMU6PDV8O9P --change-batch '
